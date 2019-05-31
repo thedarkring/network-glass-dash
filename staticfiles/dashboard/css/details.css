@@ -1,0 +1,21 @@
+.column {
+    float: left;
+    width: 50%;
+  }
+  .row:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+  
+  
+  .row {
+      border: 1px solid #A9A9A9;
+      padding: 0px;
+      box-shadow: 8px 12px 16px #C4C4C4;
+  //background: #FFFFFF;
+  //background: -moz-linear-gradient(top, #FFFFFF 0%, #FAFAFA 100%);
+  //background: -webkit-linear-gradient(top, #FFFFFF 0%, #FAFAFA 100%);
+  //background: linear-gradient(to bottom, #FFFFFF 0%, #FAFAFA 100%);
+  }
+  

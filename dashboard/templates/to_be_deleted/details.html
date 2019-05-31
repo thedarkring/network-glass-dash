@@ -1,0 +1,30 @@
+{% load static %}
+{% block nav %}
+{% include "nav.html" %}
+{% endblock %}
+<link rel="stylesheet" href="{% static 'css/base.css' %}" type="text/css" />
+{% block body %}
+<div class="container">
+<!-- <h2>{{ device.name }} ({{ device.host }}) - BGP Details</h2> -->
+<h3>{{ device.name }} - {{ peer_name }} - BGP Routes</h3>
+  
+<div class="row">
+    <div class="column">
+<h2> Advertised Routes </h2>
+{% for peer in adv_routes %}
+  {% for bob in peer %}
+  {{ bob }} <br/> 
+  {% endfor %}
+{% endfor %}
+</div>
+<div class="column">
+       <h2> Received Routes </h2>
+        {% for peer in rec_routes %}
+          {% for bob in peer %}
+          {{ bob }} <br/> 
+          {% endfor %}
+        {% endfor %}
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="instant_search" content="{{instant_search}}">
+        <meta name="device_limit" content="{{device_limit}}">
+        <link rel="icon" href="{% static 'dashboard/img/favicon.ico' %}">
+        <title>{% block title %}Network Dashboard{% endblock title %}</title>        
+        {% block extra_css_imports %}{# Block for page specific css imports #}{% endblock extra_css_imports %}
+        {% block vendor_css_imports %}
+            {% include "includes/imports/vendor_css_imports.html" %}
+        {% endblock %}
+        <link rel="stylesheet" href="{% static 'dashboard/css/base.css' %}" type="text/css" />
+        {% block extra_css_code %}{# Block for page specific css imports #}{% endblock extra_css_code %}
+    </head>
+    <body>
+        <div id="looking-glass" style="width: 50vw; height: 50vw;"></div>
+        <div>
+        {% block top_navbar %}
+            {% include "includes/nav.html" %}
+        {% endblock top_navbar %}
+        <div id="page-wrapper">
+            {% block main_body %}
+            {% endblock main_body %}
+        </div>
+        <div id="global-csrftoken">
+            {% csrf_token %}
+        </div>
+        {% block vendor_js_imports %}
+            {% include "includes/imports/vendor_js_imports.html" %}
+        {% endblock %}
+        <script src="{% static 'dashboard/js/base.js' %}"></script>
+        {% block extra_js_imports %}{# Block for extra JS imports #}{% endblock extra_js_imports %}
+        {% block extra_js_code %}{# Block for extra JS embedded code #}{% endblock extra_js_code %}
+    </body>
+</html>

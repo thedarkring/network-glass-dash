@@ -1,0 +1,36 @@
+{% block nav %}
+{% include "nav.html" %}
+{% endblock %}
+<link rel="stylesheet" href="{% static 'css/base.css' %}" type="text/css" />
+
+{% block body %}
+<div class="container">
+    <!-- <h2>{{ device.name }} ({{ device.host }}) - interfaces</h2> -->
+    <table class="table" style="width:100%">
+        <tr>
+        <th>Interface name</th>
+        <th>Description</th>
+        <th>Up/Down</th>
+        <th>Enabled/Disabled</th>
+        <!-- <th>Switch Port</th> -->
+        <th>Speed</th>
+        <!-- <th>Mac Address</th> -->
+      </tr>
+      {% for interface_name, interface in interfaces.items %}
+      <!-- <form action="{% url 'device'  device.id %}" method="post" id="{{ interface_name }}">
+        {% csrf_token %} -->
+        <input type="hidden" value="{{ interface_name }}" name="interface_name" />
+        <input type="hidden" value="{{ interface.is_enabled|yesno:'False,True' }}" name="enable" />
+      </form>
+      <tr>
+        <td>{{ interface_name }}</td>
+        <td>{{ interface.description }}</td>
+        <td>{% if interface.is_up  %}<span class="badge badge-pill badge-success">UP</span>{% else %} <span class="badge badge-pill badge-danger">Down</span>{% endif %}</td>
+        <td>{% if interface.is_enabled %}<span class="badge badge-pill badge-success">Enabled</span>{% else %} <span class="badge badge-pill badge-danger">Disabled</span>{% endif %}</td>
+        <!-- <td><button type="submit" class="btn btn-dark btn-sm" form="{{ interface_name }}" value="Submit">Switch</button></td> -->
+        <td>{{ interface.speed  }}</td>
+        <!-- <td>{{ interface.mac_address  }}</td> -->
+      </tr>
+      {% endfor %}
+    </table>
+  </div>

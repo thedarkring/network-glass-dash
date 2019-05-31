@@ -1,0 +1,56 @@
+{% load static %}
+{% block nav %}
+{% include "nav.html" %}
+{% endblock %}
+<link rel="stylesheet" href="{% static 'css/base.css' %}" type="text/css" />
+{% block body %}
+    <div id="body" class="container">
+    <table class="table">
+        <tr>
+            <th>Bulk</th>
+            <th>Name</th>
+            <th>Host</th>
+            <th>Site</th>
+            <th>Get</th>
+        </tr>
+        <form action="/multi_device/" value="values" method="post">
+            {% csrf_token %}
+            <input type="hidden" name="action" id="action" value="">
+            <input type="hidden" value="get" name="stage">
+            <input type="hidden" name="commands" id="commands" value="get">
+            <input type="hidden" id="global-csrftoken" value="{{ csrf_token }}">
+            <button type="submit" id="submit-button" style="display: none;"></button>
+            {% for device in devices %}
+            <tr>
+            <td><input class="form-check form-check-inline" type="checkbox" name="bulk" id="bulk{{device.pk}}"value={{device.pk}} /></td>
+            <td><a href=""> {{ device.name }}</a></td>
+            <td>{{ device.host }}</td>
+            <td>{{ device.site }}</td>
+            <td>
+            <div class="btn-group">
+                <button type="button" id="Action" class="btn btn-info dropdown-toggle" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    Action
+                </button>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="">Intefaces</a>
+                    <a class="dropdown-item" href="">IPS</a>
+                    <a class="dropdown-item" href="">BGP</a>
+                    <a class="dropdown-item" href="">Route Table</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" data-toggle="modal" data-target="#commandExecutorModal">Custom Command</a>
+                    </div>
+                </div>
+            </td>
+        </tr>
+            {% endfor %}
+        </form>
+        </form>
+    </table>
+</div>
+{% endblock %}
+
+{% block modal %}
+{% include "modal.html" %}
+{% endblock %}
+<script src="{% static 'js/base.js' %}"></script>

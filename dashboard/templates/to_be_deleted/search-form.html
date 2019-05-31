@@ -1,0 +1,84 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Network controller</title>
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+  <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+  <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/buttons/1.5.4/js/dataTables.buttons.min.js"></script>
+  <script src="https://cdn.datatables.net/buttons/1.5.4/js/buttons.flash.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+  <script src="https://cdn.datatables.net/buttons/1.5.4/js/buttons.html5.min.js"></script>
+  <script src="https://cdn.datatables.net/buttons/1.5.4/js/buttons.print.min.js"></script>
+  <div id="global-csrftoken">
+        {% csrf_token %}
+    </div>
+
+<div id="container" style="width: 100vw;">
+        <div id="device-div">
+            <form role="form" id="device-form">
+            <table id="device-table" class="table table-striped table-bordered table_morecondensed" cellspacing="0" style="width:98%">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>URL</th>
+                        <th>Something</th>
+                        <th>Options</th>
+
+                    </tr>
+                </thead>
+            </table>
+            </form>
+        </div>
+    
+<script>
+$( document ).ready(function() {
+    var table = $('#device-table').DataTable({
+        // dom: 'l<"toolbar">frtip',
+        processing: false,
+        serverSide: true,
+        searching: true,
+        sorting: true,
+        paging: true,
+        info: false,
+        ajax: {
+            processing: true,
+            url: "/api",
+            dataSrc: "data",
+            type: "POST",
+            data: {
+                // Attach CSRF token to POST, because we are not using a form  
+                csrfmiddlewaretoken: $('#global-csrftoken > [name=csrfmiddlewaretoken]').attr('value'),
+            }, 
+        },
+        language: {
+            "emptyTable": "No devices to display.",
+        },
+        columns: [
+                    { "data" : "pk" },
+                    { "data": "name" },
+                    { "data": "host" },
+                    { "data": "device_type" },
+                    {render: function (value, type, row) {
+                    return `<button type="button" href="{% url 'ips' 1 %}" class="btn btn-info settings-btn glyphicon glyphicon-cog"></button>`
+                }
+                },
+
+
+
+            // {
+            //     render: function (value, type, row) {
+            //         return `<button type="button" data-pk="${row.pk}" class="btn btn-info settings-btn glyphicon glyphicon-cog"></button><button type="button" data-pk="${row.pk}" class="btn btn-warning showpass-btn glyphicon glyphicon-eye-open" id="toggle-${row.pk}"></button><button type="button" data-pk="${row.pk}" class="btn btn-danger delete-btn glyphicon glyphicon-trash"></button>`
+            //     }
+            // },
+            
+        ],
+    });
+});
+</script>

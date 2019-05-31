@@ -1,0 +1,43 @@
+{% include "base.html" %}
+
+{% block main_body %}
+    <div class="container">
+        {% include "includes/devices_table.html" %}
+        {% include 'includes/modal.html' %}
+    </div>
+{% endblock main_body %}
+
+{% block extra_js_code %}
+    <script>
+        var devices_table = $('#devices-table').DataTable({
+            filter: true,
+            dom: "tip",
+            language: {
+                info: "Showing _START_ to _END_ of _TOTAL_ devices"
+            },
+            order: [],
+            columnDefs: [{
+                targets: 0,
+                orderable: false,
+            },{
+                targets: 4,
+                orderable: false,
+            }]
+        });
+    </script>
+{% endblock extra_js_code %}
+
+{% block extra_css_code %}
+    <style>
+        .pagination .page-item.active .page-link { 
+            background-color: var(--info); 
+        }
+        a, a:hover, .custom-info {
+            color: var(--info); 
+        }
+        .custom-checkbox .custom-control-input:checked~.custom-control-label::after{
+            background-color: var(--info); 
+        }
+    </style>
+{% endblock extra_css_code %}
+

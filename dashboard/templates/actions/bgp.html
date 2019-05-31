@@ -1,0 +1,20 @@
+
+      {% for peer_name, peer in neighbors.global.peers.items %}
+        <input type="hidden" value="{{ peer.is_enabled|yesno:'False,True' }}" name="enable" />
+        <input type="hidden" value="{{ peer.is_up|yesno:'False,True' }}" name="up" />
+      </form>
+      <tr>
+        <td>{{ peer_name }}</td>
+        <td><a href="{% url 'details' device.pk peer_name %}"> {{ peer.description }}</a></td>
+        <td>{% if peer.is_up  %}<span class="badge badge-pill badge-success">UP</span>{% else %} <span class="badge badge-pill badge-danger">Down</span>{% endif %}</td>
+        <td>{% if peer.is_enabled %}<span class="badge badge-pill badge-success">Enabled</span>{% else %} <span class="badge badge-pill badge-danger">Disabled</span>{% endif %}</td>
+        {% for field_name, field in peer.address_family.items %}
+        <td>{{ field.received_prefixes }}</td>
+        <td>{{ field.sent_prefixes }}</td>
+      </tr>
+      {% endfor %}
+    {% endfor %}
+    </table>
+  </div>
+</body>
+</html>

@@ -1,0 +1,49 @@
+{% block nav %}
+{% include "nav.html" %}
+{% endblock %}
+<link rel="stylesheet" href="{% static 'css/facts.css' %}" type="text/css" />
+
+<div class="content">
+<table style="display: inline-block;">
+  <tr>
+    <th colspan="2">{{ facts.hostname }}</th>
+  </tr>
+   <tr>
+    <td>Management IP</td>
+    <td>{{ device.host }}</td>
+  </tr>
+   <tr>
+    <td>Status</td>
+    <td> <div class="circle-base ok"></div>
+    </td>
+  </tr>
+  <tr>
+    <td>Serial Number</td>
+    <td>{{ facts.serial_number }}</td>
+  </tr>
+ <tr>
+    <td>FQDN</td>
+    <td>{{ facts.fqdn }}</td>
+  </tr>
+  <tr>
+  <tr>
+    <td>Model</td>
+    <td>{{ facts.model }}</td>
+  </tr>
+  <tr>
+        <td>Vendor</td>
+        <td>{{ facts.vendor }}</td>
+      </tr>
+  <tr>
+    <td>Version</td>
+    <td>{{ facts.os_version }}</td>
+  </tr>
+
+  <tr>
+    <td></td> 
+    <td class="last-cell">. . .</td>
+  </tr>
+</div>
+</body>
+</html>
+

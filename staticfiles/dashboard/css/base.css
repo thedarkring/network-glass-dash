@@ -1,0 +1,22 @@
+body {   
+    font-family: Tahoma, Geneva, sans-serif;
+    font-size: 18px;
+    letter-spacing: 1px;
+    word-spacing: 0px;
+    color: #000000;
+    font-weight: normal;
+    text-decoration: none;
+    font-style: normal;
+    text-transform: none;
+}
+table {
+    margin-left:20px;
+    margin-right:20px;
+    border: 1px solid #A9A9A9;
+    padding: 0px;
+    box-shadow: 8px 12px 16px #C4C4C4;
+    border-radius: 10px;
+  }
+.dropdown-item {
+    cursor: pointer;
+}

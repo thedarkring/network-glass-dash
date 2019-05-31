@@ -1,0 +1,34 @@
+{% load staticfiles %}
+<div id="app" class="container">
+    <nav class="navbar navbar-expand-lg navbar-light">                    
+        <a class="navbar-brand" href="{% url 'dashboard' %}"> <h1 style="padding-left: 110px; color: var(--info); "> Network Looking Glass</h1> </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div id="bulk-menu" style="padding-right: 40px; padding-left: 40px; visibility: hidden;">
+            {% block bulk_actions_menu %}
+                <div id="navbarNavDropdown" class="navbar-collapse collapse">
+                    <ul class="navbar-nav">
+                        <li class="nav-item dropdown">
+
+                                <button class="nav-link dropdown-toggle btn btn-sm btn-info" style="color: white;" id="SitesDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Bulk Action
+                                        </button>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                {% for data, name in actions.items %}
+                                    <a class="dropdown-item submit-nav-button" href="javascript:void(0)" data-action="{{ data }}">{{ name }}</a>
+                                {% endfor %}
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            {% endblock %}
+    </div>
+        <input class="form-control mr-sm-2" type="text" name="terms" id="search_field" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-info my-2 my-sm-0" value="Search" id="search" action="">Search</button>
+    </nav>
+</div>
+
+
+
+

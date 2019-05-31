@@ -1,0 +1,19 @@
+{% block nav %}
+{% include "nav.html" %}
+{% endblock %}
+
+<div class="container">
+<h1>{{ device.name }} - Routes</h1>
+<table id="routes" class="display">
+        <thead>
+            <tr>
+                <th>Routes</th>
+            </tr>       
+                    {% for route in route_table %}
+                    {% for line in route %}
+                <tr>
+                    <td>{{line}}</td> 
+                </tr>
+                    {% endfor %}
+                  {% endfor %}
+</table>

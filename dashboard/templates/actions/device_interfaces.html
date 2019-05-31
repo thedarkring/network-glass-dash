@@ -1,0 +1,9 @@
+{% for interface_name, interface in interfaces.items %}
+        <tr>
+                <td>{{ interface_name }}</td>
+                <td>{{ interface.description }}</td>
+                <td>{% if interface.is_up  %}<span class="badge badge-pill badge-success">UP</span>{% else %} <span class="badge badge-pill badge-danger">Down</span>{% endif %}</td>
+                <td>{% if interface.is_enabled %}<span class="badge badge-pill badge-success">Enabled</span>{% else %} <span class="badge badge-pill badge-danger">Disabled</span>{% endif %}</td>
+                <td>{{ interface.speed  }}</td>
+        </tr>
+        {% endfor %}

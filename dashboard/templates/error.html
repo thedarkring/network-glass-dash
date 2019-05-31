@@ -1,0 +1,10 @@
+{% include "base.html" %}
+
+{% block main_body %}
+    <div class="container">
+        <div class="alert alert-danger" role="alert">
+                THRESHOLD VIOLATION: Unable to execute on {{device_count}} devices, threshold is set at {{device_limit}}
+        </div>
+    </div>
+{% endblock main_body %}
+

@@ -1,0 +1,8 @@
+
+      {% for key, value in hunter.items %} 
+      <tr>
+        {% for list in value %}<td>{{list | safe}}<br \></td>{% endfor %}
+      {% endfor %}
+    </tr>
+
+
